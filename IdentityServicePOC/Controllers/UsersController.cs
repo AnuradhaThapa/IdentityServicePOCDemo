@@ -1,5 +1,6 @@
 ﻿using IdentityService.Core.Entities;
 using IdentityService.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,9 @@ namespace IdentityService.API.Controllers
     /// <summary>
     /// Users Controller
     /// </summary>
-    [Route("api/v1/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/v1/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository iuserRepository;

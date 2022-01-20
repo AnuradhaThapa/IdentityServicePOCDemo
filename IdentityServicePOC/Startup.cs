@@ -2,6 +2,7 @@ using IdentityService.Core.Interfaces;
 using IdentityService.Infrastructure.Model;
 using IdentityService.Infrastructure.Models;
 using IdentityService.Infrastructure.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -51,8 +52,16 @@ namespace IdentityServicePOC
                 x.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "IdentityServiceAPI.xml"));
             });
             services.AddAutoMapper(typeof(UserProfile));
-            
-            
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://dev-56518799.okta.com/oauth2/default";
+                options.Audience = "api://default";
+                options.RequireHttpsMetadata = false;
+            });
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
 
@@ -68,9 +77,9 @@ namespace IdentityServicePOC
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
-            app.UseEndpoints(endpoints => {
-                endpoints.MapControllers();
-            });
+            //app.UseEndpoints(endpoints => {
+            //    endpoints.MapControllers();
+            //});
             
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -78,7 +87,14 @@ namespace IdentityServicePOC
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "User API V1");
                 c.RoutePrefix = string.Empty;
             });
-            
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            app.UseMvc();
         }
     }
 }
