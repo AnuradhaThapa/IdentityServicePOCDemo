@@ -22,7 +22,7 @@ namespace IdentityService.Infrastructure.Repository
             this.context = context;
             imapper = mapper;
         }
-        public async Task<UserDetailEntity> GetUserByApiId(string apiId)
+        public async Task<UserDetailEntity> GetUserByAplId(string apiId)
         {
             UserDetailEntity userDetailEntity = null;
             UserDetail userDetail = await context.UserDetails.Where(x => x.AplId == apiId).FirstOrDefaultAsync();

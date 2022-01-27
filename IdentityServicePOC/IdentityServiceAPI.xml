@@ -15,7 +15,7 @@
             </summary>
             <param name="userRepository"></param>
         </member>
-        <member name="M:IdentityService.API.Controllers.UsersController.GetUserByApiId(System.String)">
+        <member name="M:IdentityService.API.Controllers.UsersController.GetUserByAplId(System.String)">
             <summary>
             Get User details by Apl id
             </summary>

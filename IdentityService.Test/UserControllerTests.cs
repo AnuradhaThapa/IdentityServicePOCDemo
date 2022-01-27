@@ -24,11 +24,11 @@ namespace IdentityService.Test
         {
             //arrange
             var user = GetSampleData();
-            service.Setup(x => x.GetUserByApiId("API1234")).Returns(user);
+            service.Setup(x => x.GetUserByAplId("API1234")).Returns(user);
             var controller = new UsersController(service.Object);
 
             //act
-            var actionResult = controller.GetUserByApiId("API1234");
+            var actionResult = controller.GetUserByAplId("API1234");
             var result = actionResult.Result as OkObjectResult;
             var actual = result.Value as UserDetailEntity;
 
@@ -42,13 +42,13 @@ namespace IdentityService.Test
         {
             //arrange
             var user = GetSampleData();
-            service.Setup(x => x.GetUserByApiId("API1234")).Returns(user);
+            service.Setup(x => x.GetUserByAplId("API1234")).Returns(user);
             var controller = new UsersController(service.Object);
 
             //act
-            var actionResult = controller.GetUserByApiId("API10");
+            var actionResult = controller.GetUserByAplId("API10");
 
-            //assert
+            //assert 
             var result = actionResult.Result;
             Assert.IsType<NotFoundResult>(result);
         }

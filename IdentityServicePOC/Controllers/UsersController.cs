@@ -13,7 +13,7 @@ namespace IdentityService.API.Controllers
     /// <summary>
     /// Users Controller
     /// </summary>
-    [Authorize]
+   // [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class UsersController : ControllerBase
@@ -33,12 +33,13 @@ namespace IdentityService.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>UserDetailsEntity</returns>
+        [Authorize]
         [HttpGet]
         [Route("UserId/{id}")]
         [ProducesResponseType(typeof(UserDetailEntity), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetUserByApiId(string id)
+        public async Task<IActionResult> GetUserByAplId(string id)
         {
-            UserDetailEntity userDetailEntity = await iuserRepository.GetUserByApiId(id);
+            UserDetailEntity userDetailEntity = await iuserRepository.GetUserByAplId(id);
             if(userDetailEntity == null)
             {
                 return NotFound();

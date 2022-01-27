@@ -8,7 +8,7 @@ namespace IdentityService.Core.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserDetailEntity> GetUserByApiId(string apiId);
+        Task<UserDetailEntity> GetUserByAplId(string apiId);
         Task<string> GetUserByUserId(Guid guidid);
     }
 }
